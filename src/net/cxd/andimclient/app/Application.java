@@ -1,13 +1,11 @@
 package net.cxd.andimclient.app;
 
 import net.cxd.andimclient.service.LocalService;
-import net.cxd.im.entity.User;
 import net.cxd.im.service.UserHttpService;
 import net.cxd.im.service.impl.UserHttpServiceImpl;
 import android.content.Intent;
 
 import com.nb82.bean.db.CFrameDb;
-import com.nb82.bean.db.sqlite.DbModel;
 import com.nb82.core.AppContextControll;
 import com.nb82.view.bitmap.CBitmap;
 

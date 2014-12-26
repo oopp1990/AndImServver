@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.EditText;
 
 import com.nb82.bean.db.CFrameDb;
 import com.nb82.bean.db.sqlite.DbModel;
@@ -58,6 +59,10 @@ public class StartAc extends BaseActivity{
 	}
 	
 	public void login(View view){
+		if (view != null) {
+			name = ((EditText)findViewById(R.id.name)).getText().toString();
+			password = ((EditText)findViewById(R.id.password)).getText().toString();
+		}
 		Task task = new Task(TaskId.login,UserService.class, "login",handler, null);
 		task.params.put("name", name);
 		task.params.put("password", password);
