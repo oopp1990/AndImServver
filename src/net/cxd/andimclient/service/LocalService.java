@@ -1,9 +1,12 @@
 package net.cxd.andimclient.service;
 
+import net.cxd.im.server.ImServer;
+import net.cxd.im.server.ImServer.ImServerConfig;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Binder;
@@ -12,10 +15,22 @@ import android.util.Log;
 
 public class LocalService extends Service {
 	private static final String tag = "LocalService >>> ";
+	private ImServer imServer;
+	private Thread ImThread;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction("im.user.startImServer");
+		filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+		registerReceiver(new NetBroadCastReceiver(), filter);
+		ImServerConfig config = new ImServerConfig();
+		config.ipHost = "localhost";
+		config.port = 8000;
+		config.KeepOnlive = true;
+		imServer = new ImServer(config, new MessageListener());
+		ImThread = new Thread(imServer);
 	}
 
 	@Override
@@ -57,9 +72,15 @@ public class LocalService extends Service {
 				info = connectivityManager.getActiveNetworkInfo();
 				if (info != null && info.isAvailable()) {
 					Log.i(tag, "当前有可用网络！");
+					if (imServer.getChannel() == null) {
+						ImThread.start();
+					}
 				} else {
 					Log.i(tag, "当前没有可用网络！");
+					ImThread.interrupt();
 				}
+			} else if (action.equals("im.user.startImServer")) {
+				ImThread.start();
 			}
 		}
 	}

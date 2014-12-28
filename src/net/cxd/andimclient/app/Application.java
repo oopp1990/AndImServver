@@ -1,5 +1,6 @@
 package net.cxd.andimclient.app;
 
+import net.cxd.andimclient.api.UserService;
 import net.cxd.andimclient.service.LocalService;
 import net.cxd.im.service.UserHttpService;
 import net.cxd.im.service.impl.UserHttpServiceImpl;
@@ -17,9 +18,6 @@ public class Application extends AppContextControll {
 		Intent intent = new Intent(this, LocalService.class);
 		stopService(intent);
 		
-			
-		
-		
 	}
 
 	@Override
@@ -27,11 +25,10 @@ public class Application extends AppContextControll {
 		cache.put("cbitmap", CBitmap.create(this));
 		CFrameDb cFrameDb = CFrameDb.create(this, "ImClient.db", true);
 		cache.put("cFrameDb", cFrameDb);
-		
-
-		
-		UserHttpService httpService = new UserHttpServiceImpl();
-		cache.put("httpService", httpService);
+//		
+//		UserHttpService httpService = new UserHttpServiceImpl();
+		UserService userService = new UserService();
+		cache.put("httpService", userService);
 		
 		Intent intent = new Intent(this, LocalService.class);
 		startService(intent);

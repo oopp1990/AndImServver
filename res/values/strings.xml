@@ -1,5 +1,7 @@
 <resources>
 
     <string name="app_name">AndImClient</string>
+    <string name="reg"><u>立即注册</u></string>
+    <string name="resetPass"><u>找回密码</u></string>
 
 </resources>
