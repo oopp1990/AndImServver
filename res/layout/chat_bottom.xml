@@ -1,4 +1,4 @@
-<com.hx.sobu.chat.FaceRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<net.cxd.andimclient.util.FaceRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/FaceRelativeLayout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
@@ -83,4 +83,4 @@
         </LinearLayout>
     </RelativeLayout>
 
-</com.hx.sobu.chat.FaceRelativeLayout>
+</net.cxd.andimclient.util.FaceRelativeLayout>

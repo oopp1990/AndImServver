@@ -106,7 +106,7 @@
             android:layout_marginTop="5dp" >
 
             <ImageView
-                android:id="@+id/img1"
+                android:id="@+id/img2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@+id/img1"
+                android:layout_toRightOf="@+id/img2"
                 android:text="老板，价格优惠点呗？"
                 android:textColor="@color/font"
                 />
@@ -130,7 +130,7 @@
             android:layout_marginTop="5dp" >
 
             <ImageView
-                android:id="@+id/img1"
+                android:id="@+id/img3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@+id/img1"
+                android:layout_toRightOf="@+id/img3"
                 android:text="好的，谢谢!" 
                  android:textColor="@color/font"
                    />
@@ -154,7 +154,7 @@
             android:layout_marginTop="5dp" >
 
             <ImageView
-                android:id="@+id/img1"
+                android:id="@+id/img4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -166,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@+id/img1"
+                android:layout_toRightOf="@+id/img4"
                 android:text="现在忙，一会儿联系您！" 
                    android:textColor="@color/font"
                    />
