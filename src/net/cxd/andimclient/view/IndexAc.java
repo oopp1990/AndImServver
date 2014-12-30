@@ -25,14 +25,15 @@ public class IndexAc extends BaseActivity {
 	private ImageButton index_msg;
 	private ImageButton index_my;
 	private ImageButton index_fabu;
-	
-	private static MsgAc msgAc;
-	
+
+	private static IndexMsgAc msgAc;
+
 	private MsgHander handler;
 	private HandlerThread handlerThread;
-	
+
 	private KennerControll controll;
 	private Application app;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,20 +47,21 @@ public class IndexAc extends BaseActivity {
 
 	@Override
 	public void init(Object object) {
-		msgAc = new MsgAc(this);
+		msgAc = new IndexMsgAc(this);
 		pager.addView(msgAc);
-		//TODO add other View
-		
+		// TODO add other View
+
 		handlerThread = new HandlerThread("main_looper");
 		handlerThread.start();
 		handler = new MsgHander(handlerThread.getLooper());
-		
-		app = ((Application)getApplication());
+
+		app = ((Application) getApplication());
 		controll = (KennerControll) app.cache.get("kennerControll");
-		//TODO  初始化消息界面
-		Task task = new Task(TaskId.FIND_INDEX_MSG_LIST,BaseApi.class, "getIndexMsgList", handler, null);
+		// TODO 初始化消息界面
+		Task task = new Task(TaskId.FIND_INDEX_MSG_LIST, BaseApi.class,
+				"getIndexMsgList", handler, null);
 		controll.doTask(task);
-		
+
 	}
 
 	public void changeLayout(View view) {
@@ -79,11 +81,11 @@ public class IndexAc extends BaseActivity {
 		}
 	}
 
-	
-	static class MsgHander extends Handler{
+	static class MsgHander extends Handler {
 		public MsgHander(Looper looper) {
 			super(looper);
 		}
+
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
@@ -92,7 +94,7 @@ public class IndexAc extends BaseActivity {
 				if (msg.obj != null) {
 					msgAc.getAdapter().setList((List<UserMsg>) msg.obj);
 					msgAc.getAdapter().notifyDataSetChanged();
-				}else{
+				} else {
 					msgAc.getMsg_nomsg().setVisibility(View.VISIBLE);
 				}
 				break;
@@ -101,11 +103,26 @@ public class IndexAc extends BaseActivity {
 			}
 		}
 	}
+
 	@Override
 	protected void onDestroy() {
 		handlerThread.quit();
 		super.onDestroy();
 	}
-	
-	
+
+	public void newMsg(UserMsg msg) {
+		List<UserMsg> list = msgAc.getAdapter().getList();
+		if (list != null && list.size() > 0) {
+			for (UserMsg userMsg : list) {
+				if (msg.getUid() == userMsg.getUid()
+						&& msg.getMsgType() == userMsg.getMsgType()) {
+					list.remove(userMsg);
+					break;
+				}
+			}
+			list.add(0,msg);
+			msgAc.getAdapter().setList(list);
+			msgAc.getAdapter().notifyDataSetChanged();
+		}
+	}
 }

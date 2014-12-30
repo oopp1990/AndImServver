@@ -13,7 +13,7 @@ import android.widget.TextView;
  * @author oopp1990
  *
  */
-public class MsgAc extends RelativeLayout{
+public class IndexMsgAc extends RelativeLayout{
 	private Activity ctx ;
 	private ListView msgList;
 	private TextView msg_nomsg;
@@ -37,7 +37,7 @@ public class MsgAc extends RelativeLayout{
 	public void setMsg_nomsg(TextView msg_nomsg) {
 		this.msg_nomsg = msg_nomsg;
 	}
-	public MsgAc(Activity context) {
+	public IndexMsgAc(Activity context) {
 		super(context);
 		this.ctx = context;
 		initView();

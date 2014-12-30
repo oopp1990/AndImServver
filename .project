@@ -38,19 +38,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>java</name>
+			<name>ServiceClient</name>
 			<type>2</type>
-			<location>E:/eclipse/work4/ImServiceClient/src/main/java</location>
+			<location>D:/workspace/work1/ImServiceClient/src/main/java</location>
 		</link>
 	</linkedResources>
-	<variableList>
-		<variable>
-			<name>CFrame</name>
-			<value>file:/E:/cxdworkspace/adt-bundle-windows-x86_64-20140702/workspcaes/work1/CFrameCopy2</value>
-		</variable>
-		<variable>
-			<name>CFrame1</name>
-			<value>file:/E:/eclipse/work4/CFrameCopy2</value>
-		</variable>
-	</variableList>
 </projectDescription>

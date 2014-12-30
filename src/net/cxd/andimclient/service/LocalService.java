@@ -1,7 +1,9 @@
 package net.cxd.andimclient.service;
 
+import net.cxd.andimclient.app.Application;
 import net.cxd.im.server.ImServer;
 import net.cxd.im.server.ImServer.ImServerConfig;
+import android.app.Activity;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -17,7 +19,8 @@ public class LocalService extends Service {
 	private static final String tag = "LocalService >>> ";
 	private ImServer imServer;
 	private Thread ImThread;
-
+	private Activity ac;
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -58,6 +61,13 @@ public class LocalService extends Service {
 	public IBinder onBind(Intent intent) {
 		return new LocalBinder();
 	}
+	public Activity getAc() {
+		return ac;
+	}
+
+	public void setAc(Activity ac) {
+		this.ac = ac;
+	}
 	private boolean isOnline = false;
 	class NetBroadCastReceiver extends BroadcastReceiver {
 		private ConnectivityManager connectivityManager;
@@ -73,9 +83,11 @@ public class LocalService extends Service {
 				if (info != null && info.isAvailable()) {
 					Log.i(tag, "当前有可用网络！");
 					isOnline = true;
-					if (imServer.getChannel() == null) {
-						ImThread.start();
-						
+					if (Application.ctx.cache.get("user") != null) {
+						if (imServer.getChannel() == null) {
+							ImThread.interrupt();
+							ImThread.start();
+						}
 					}
 				} else {
 					Log.i(tag, "当前没有可用网络！");
@@ -83,9 +95,9 @@ public class LocalService extends Service {
 					ImThread.interrupt();
 				}
 			} else if (action.equals("im.user.startImServer")) {
+				ImThread.interrupt();
 				ImThread.start();
 			}
 		}
 	}
-
 }
