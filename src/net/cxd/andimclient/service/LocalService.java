@@ -58,7 +58,7 @@ public class LocalService extends Service {
 	public IBinder onBind(Intent intent) {
 		return new LocalBinder();
 	}
-
+	private boolean isOnline = false;
 	class NetBroadCastReceiver extends BroadcastReceiver {
 		private ConnectivityManager connectivityManager;
 		private NetworkInfo info;
@@ -72,11 +72,14 @@ public class LocalService extends Service {
 				info = connectivityManager.getActiveNetworkInfo();
 				if (info != null && info.isAvailable()) {
 					Log.i(tag, "当前有可用网络！");
+					isOnline = true;
 					if (imServer.getChannel() == null) {
 						ImThread.start();
+						
 					}
 				} else {
 					Log.i(tag, "当前没有可用网络！");
+					isOnline = false;
 					ImThread.interrupt();
 				}
 			} else if (action.equals("im.user.startImServer")) {

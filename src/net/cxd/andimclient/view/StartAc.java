@@ -5,6 +5,7 @@ import net.cxd.andimclient.api.UserService;
 import net.cxd.andimclient.app.Application;
 import net.cxd.andimclient.util.TaskId;
 import net.cxd.im.entity.ResultBean;
+import net.cxd.im.entity.User;
 import net.cxd.im.entity.UserInfo;
 import net.cxd.im.service.impl.UserHttpServiceImpl;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import com.nb82.bean.db.sqlite.DbModel;
 import com.nb82.core.KennerControll;
 import com.nb82.entity.BaseActivity;
 import com.nb82.entity.Task;
+import com.nb82.util.DbException;
 
 public class StartAc extends BaseActivity {
 	KennerControll kennerControll;
@@ -62,7 +64,8 @@ public class StartAc extends BaseActivity {
 	public void freash(Object object) {
 		ResultBean resultBean = (ResultBean) object;
 		if (resultBean.isResult()) {
-			UserInfo info = JSON.parseObject(resultBean.getMessage(), UserInfo.class);
+			UserInfo info = JSON.parseObject(resultBean.getMessage(),
+					UserInfo.class);
 			app.cache.put("userInfo", info);
 			Intent intent = new Intent(this, IndexAc.class);
 			startActivity(intent);
@@ -83,8 +86,8 @@ public class StartAc extends BaseActivity {
 				password = ((EditText) findViewById(R.id.password)).getText()
 						.toString();
 			}
-			Task task = new Task(TaskId.login, UserService.class,
-					"login", handler, null);
+			Task task = new Task(TaskId.login, UserService.class, "login",
+					handler, null);
 			task.params.put("name", name);
 			task.params.put("password", password);
 			task.obj = app.cache.get("userService");
@@ -96,7 +99,7 @@ public class StartAc extends BaseActivity {
 			EditText ename = (EditText) findViewById(R.id.ename);
 			EditText epwd1 = (EditText) findViewById(R.id.pwd1);
 			EditText epwd2 = (EditText) findViewById(R.id.pwd2);
-			String name = ename.getText().toString();
+			name = ename.getText().toString();
 			String pwd1 = epwd1.getText().toString();
 			String pwd2 = epwd2.getText().toString();
 			if (name == null || name.length() <= 6) {
@@ -112,10 +115,10 @@ public class StartAc extends BaseActivity {
 				Toast.makeText(this, "两次输入的密码不一样！！", Toast.LENGTH_SHORT).show();
 				return;
 			}
-			Task task = new Task(TaskId.regist, UserService.class,
-					"regist", handler, null);
+			Task task = new Task(TaskId.regist, UserService.class, "regist",
+					handler, null);
 			task.params.put("name", name);
-			task.params.put("password", pwd1);
+			task.params.put("password", (password = pwd1));
 			task.obj = app.cache.get("userService");
 			kennerControll.doTask(task);
 		}
@@ -135,6 +138,13 @@ public class StartAc extends BaseActivity {
 			case TaskId.regist:
 				if (msg.obj != null) {
 					freash(msg.obj);
+					try {
+						User user = new User(name, password);
+						user.setLastLogin(System.currentTimeMillis());
+						((CFrameDb) app.cache.get("cFrameDb")).save(user);
+					} catch (DbException e) {
+						e.printStackTrace();
+					}
 				}
 				break;
 			default:

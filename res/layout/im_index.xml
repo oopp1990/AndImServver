@@ -6,7 +6,7 @@
         android:id="@+id/index_page"        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginBottom="50dp"
-        android:background="#334400" >
+        android:background="#00000000" >
     </android.support.v4.view.ViewPager>
 
     <LinearLayout
@@ -21,7 +21,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00000000"
-            android:src="@drawable/menu_msg"/>
+            android:src="@drawable/menu_msg"
+            android:onClick="changeLayout"/>
 
         <ImageButton android:id="@+id/index_my"
             android:layout_width="match_parent"

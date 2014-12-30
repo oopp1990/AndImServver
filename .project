@@ -40,7 +40,7 @@
 		<link>
 			<name>java</name>
 			<type>2</type>
-			<location>C:/Users/oopp1990/git/CFrame/src/main/java</location>
+			<location>E:/eclipse/work4/ImServiceClient/src/main/java</location>
 		</link>
 	</linkedResources>
 	<variableList>
@@ -49,8 +49,8 @@
 			<value>file:/E:/cxdworkspace/adt-bundle-windows-x86_64-20140702/workspcaes/work1/CFrameCopy2</value>
 		</variable>
 		<variable>
-			<name>ImServerClient</name>
-			<value>file:/E:/eclipse/work4/ImServerClient</value>
+			<name>CFrame1</name>
+			<value>file:/E:/eclipse/work4/CFrameCopy2</value>
 		</variable>
 	</variableList>
 </projectDescription>

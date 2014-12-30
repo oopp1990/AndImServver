@@ -6,4 +6,7 @@ public class TaskId {
 	public static final int changePassword = 0x00003;
 	public static final int updateUserinfo = 0x00004;
 	
+	
+	public static final int FIND_INDEX_MSG_LIST = 0x00010;
+	
 }
