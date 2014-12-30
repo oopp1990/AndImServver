@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.nb82.bean.db.CFrameDb;
 import com.nb82.util.AcUtil;
 
-import net.cxd.andimclient.app.Application;
+import net.cxd.andimclient.app.MyApplication;
 import net.cxd.andimclient.util.SoundManager;
 import net.cxd.andimclient.view.IndexAc;
 import net.cxd.andimclient.view.UserMsgAc;
@@ -56,6 +56,8 @@ public class MessageListener extends MessageLister {
 							// 收到消息和当前聊天用户ID一样
 							msg.setIsRead(1);// 已读
 							msgAc.newMsg(msg);
+						}else{
+							SoundManager.newInstance(MyApplication.ctx).playSound(1);
 						}
 					} else {
 						// TODO 播放声音， 并且将未读消息添加到IndexMsg上面，并且显示小红点
@@ -64,15 +66,14 @@ public class MessageListener extends MessageLister {
 							IndexAc indexAc = (IndexAc) AcUtil.getAc();
 							indexAc.newMsg(msg);
 						}
-						SoundManager.newInstance(Application.ctx).playSound(1);
+						SoundManager.newInstance(MyApplication.ctx).playSound(1);
 					}
 				} else {
 					// TODO notify
-					
-					
+					SoundManager.newInstance(MyApplication.ctx).notifyAction(msg);
 				}
 				// save msg
-				CFrameDb cFrameDb = (CFrameDb) Application.ctx.cache.get("cFrameDb");
+				CFrameDb cFrameDb = (CFrameDb) MyApplication.ctx.cache.get("cFrameDb");
 				cFrameDb.save(msg);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -86,6 +87,6 @@ public class MessageListener extends MessageLister {
 	@Override
 	public void cachtException(Exception e) throws IOException {
 		// TODO Auto-generated method stub
-
+		e.printStackTrace();
 	}
 }

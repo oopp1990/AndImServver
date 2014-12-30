@@ -16,8 +16,8 @@ import com.nb82.bean.db.CFrameDb;
 import com.nb82.core.AppContextControll;
 import com.nb82.view.bitmap.CBitmap;
 
-public class Application extends AppContextControll {
-	public static  Application ctx;
+public class MyApplication extends AppContextControll {
+	public static  MyApplication ctx;
 	@Override
 	public void uncaughtException(Thread thread, Throwable ex) {
 		ex.printStackTrace();

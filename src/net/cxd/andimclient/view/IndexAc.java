@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.cxd.andimclient.R;
 import net.cxd.andimclient.api.BaseApi;
-import net.cxd.andimclient.app.Application;
+import net.cxd.andimclient.app.MyApplication;
 import net.cxd.andimclient.util.TaskId;
 import net.cxd.im.entity.UserMsg;
 import android.os.Bundle;
@@ -32,7 +32,7 @@ public class IndexAc extends BaseActivity {
 	private HandlerThread handlerThread;
 
 	private KennerControll controll;
-	private Application app;
+	private MyApplication app;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class IndexAc extends BaseActivity {
 		handlerThread.start();
 		handler = new MsgHander(handlerThread.getLooper());
 
-		app = ((Application) getApplication());
+		app = ((MyApplication) getApplication());
 		controll = (KennerControll) app.cache.get("kennerControll");
 		// TODO 初始化消息界面
 		Task task = new Task(TaskId.FIND_INDEX_MSG_LIST, BaseApi.class,

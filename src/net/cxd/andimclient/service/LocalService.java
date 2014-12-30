@@ -1,9 +1,10 @@
 package net.cxd.andimclient.service;
 
-import net.cxd.andimclient.app.Application;
+import net.cxd.andimclient.app.MyApplication;
 import net.cxd.im.server.ImServer;
 import net.cxd.im.server.ImServer.ImServerConfig;
 import android.app.Activity;
+import android.app.Application;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -83,7 +84,7 @@ public class LocalService extends Service {
 				if (info != null && info.isAvailable()) {
 					Log.i(tag, "当前有可用网络！");
 					isOnline = true;
-					if (Application.ctx.cache.get("user") != null) {
+					if (MyApplication.ctx.cache.get("user") != null) {
 						if (imServer.getChannel() == null) {
 							ImThread.interrupt();
 							ImThread.start();

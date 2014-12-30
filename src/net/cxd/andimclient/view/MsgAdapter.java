@@ -6,7 +6,7 @@ import java.util.List;
 import com.nb82.view.bitmap.CBitmap;
 
 import net.cxd.andimclient.R;
-import net.cxd.andimclient.app.Application;
+import net.cxd.andimclient.app.MyApplication;
 import net.cxd.andimclient.util.TimeConventUtil;
 import net.cxd.im.entity.UserMsg;
 import android.app.Activity;
@@ -27,7 +27,7 @@ public class MsgAdapter extends BaseAdapter implements ListAdapter {
 
 	public MsgAdapter(Activity context) {
 		this.context = context;
-		Application app = (Application) context.getApplication();
+		MyApplication app = (MyApplication) context.getApplication();
 		cBitmap = (CBitmap) app.cache.get("cBitmap");
 	}
 

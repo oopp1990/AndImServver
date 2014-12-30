@@ -2,7 +2,7 @@ package net.cxd.andimclient.view;
 
 import net.cxd.andimclient.R;
 import net.cxd.andimclient.api.UserService;
-import net.cxd.andimclient.app.Application;
+import net.cxd.andimclient.app.MyApplication;
 import net.cxd.andimclient.util.TaskId;
 import net.cxd.im.entity.ResultBean;
 import net.cxd.im.entity.User;
@@ -26,20 +26,24 @@ import com.nb82.util.DbException;
 
 public class StartAc extends BaseActivity {
 	KennerControll kennerControll;
-	Application app;
+	MyApplication app;
 	String name;
 	String password;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.im_start);
+		setContentView(R.layout.im_start);
+		
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
 		init(null);
 	}
-
 	@Override
 	public void init(Object object) {
-		app = ((Application) getApplication());
+		app = ((MyApplication) getApplication());
 		kennerControll = (KennerControll) app.cache.get("kennerControll");
 		try {
 			DbModel model = ((CFrameDb) app.cache.get("cFrameDb"))
